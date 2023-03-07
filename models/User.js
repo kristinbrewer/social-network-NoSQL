@@ -1,5 +1,6 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
+//schema to create new user model
 const userSchema = new Schema(
     {
         username: {
