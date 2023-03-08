@@ -4,7 +4,7 @@ const {
     getSingleUser,
     createUser,
     updateSingleUser,
-    deleteSingeUser,
+    deleteSingleUser,
     addFriend,
     deleteFriend,
     //bonus remove a user's associated thoughts
@@ -18,7 +18,7 @@ router
   .route('/:userId')
   .get(getSingleUser)
   .put(updateSingleUser)
-  .delete(deleteSingeUser);
+  .delete(deleteSingleUser);
 
 
   // /api/users/:userId/friends/ :friendId
