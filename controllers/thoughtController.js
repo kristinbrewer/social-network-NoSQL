@@ -1,17 +1,10 @@
-const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
-
 
 module.exports = {
     //get all thoughts 
     getThoughts(req, res) {
         Thought.find()
-        .then(async (thoughts) => {
-            const thoughtObj = {
-                thoughts,
-            };
-            return res.json(thoughtObj);
-        })
+        .then((thoughts) => res.json(thoughts))
         .catch((err) => {
             console.log(err);
             return res.status(500).json(err);
@@ -27,6 +20,7 @@ module.exports = {
               ? res.status(404).json({ message: 'No thought with that ID' })
               : res.json({
                   thought,
+                  //reactions? 
                 })
           )
           .catch((err) => {
@@ -60,31 +54,33 @@ module.exports = {
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No such thought exists' })
-          : Thought.findOneAndUpdate(
-              { thoughts: req.params.thought },
+          : User.findOneAndUpdate(
+              { thoughts: req.params.thoughtId },
               { $pull: { thoughts: req.params.thoughtId } },
               { new: true }
             )
       )
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+      .then((user) =>
+        !user
+          ? res.status(404).json({
+              message: 'Thought created but no user with this id!',
+            })
+          : res.json({ message: 'Thought successfully deleted!' })
+      )
+      .catch((err) => res.status(500).json(err));
   },
 //add reaction
 addReaction(req, res) {
-    console.log('You are adding a friend');
+    console.log('You are adding a reaction');
     console.log(req.body);
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $addToSet: { friends: params.reactionId } },
+      { $addToSet: { reactions: req.body  } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
         !thought
-          ? res
-              .status(404)
-              .json({ message: 'No thought found with that ID :(' })
+          ? res.status(404).json({ message: 'No thought found with that ID :(' })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
@@ -94,7 +90,7 @@ addReaction(req, res) {
 deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $pull: { friends: params.reactionId } },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
