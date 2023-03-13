@@ -80,8 +80,8 @@ module.exports = {
   },
 //add reaction
 addReaction(req, res) {
-    console.log('You are adding a reaction');
-    console.log(req.body);
+    //console.log('You are adding a reaction');
+    //console.log(req.body);
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $addToSet: { reactions: req.body  } },

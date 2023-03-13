@@ -4,11 +4,11 @@ User will use command-line application to interface with a social network platfo
 ## Description
 This application utilizes a command-line initiation and Insomnia to allow users to dynamically navigate NoSQL informational datbases with an API network. When the server is initialezed using `node server.js` Mongoose models are synced to the MonogoDB database. As user navigates GET routes for users and thoughts, data is displayed in JSON format. USER can also test API for POST, PUT, and DELETE to successfully create, update and delete users and thoughts in database. Users can also test API routes for POST and DELETE of thought reactions and friends to friend's lists. When a user is deleted, all thoughts are also deleted. 
 
-![Mockup of Employee Tracker.](./sqlmockup.png)
+![Mockup of Social Network in Insomnia.](./apiNoSQL.png)
 
 [GitHub Repo](https://github.com/kristinbrewer/social-network-NoSQL)
 
-[Video Walk Through](https://drive.google.com/file/d/1HAkej-2glYeo4O1t5OCe4TtBxLrT2SVU/view)
+[Video Walk Through](https://drive.google.com/file/d/1J3-Igf04PbfU5H4R8ctI8JOzmH4H97IC/view)
 
 
 ## Table of Contents
